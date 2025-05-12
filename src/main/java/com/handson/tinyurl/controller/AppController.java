@@ -39,20 +39,22 @@ public class AppController {
     private UserClickRepository userClickRepository;
     Random random = new Random();
 
-    @RequestMapping(value = "/set", method = RequestMethod.GET)
-    public Boolean set(@RequestParam String key, @RequestParam String value) {
-        return redis.set(key,value);
-    }
-
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public String hello(@RequestParam String key) {
-        return redis.get(key).toString();
-    }
+//    @RequestMapping(value = "/set", method = RequestMethod.GET)
+//    public Boolean set(@RequestParam String key, @RequestParam String value) {
+//        return redis.set(key,value);
+//    }
+//
+//    @RequestMapping(value = "/get", method = RequestMethod.GET)
+//    public String hello(@RequestParam String key) {
+//        return redis.get(key).toString();
+//    }
 
     @Autowired
     ObjectMapper om;
-    @Value("${base.url}")
-    String baseUrl;
+//    @Value("${base.url}")
+//    String baseUrl;
+    @Value("${base.tiny_host}")
+    String hostingUrl;
 
 //    @RequestMapping(value = "/tiny", method = RequestMethod.POST)
 //    public String generate(@RequestBody NewTinyRequest request) throws JsonProcessingException {
@@ -121,7 +123,7 @@ public class AppController {
             i++;
         }
         if (i == MAX_RETRIES) throw new RuntimeException("SPACE IS FULL");
-        return baseUrl + tinyCode + "/";
+        return hostingUrl + tinyCode + "/";
     }
 
     @RequestMapping(value = "/{tiny}/", method = RequestMethod.GET)
